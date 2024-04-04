@@ -7,13 +7,13 @@ The application data has a simple structure. There are multiple sites, each with
 contain multiple tags (where tag in this context refers to a sensor). Each tag has an `id`, `name`, `site_id`, optional 
 `unit` and a `created_at` timestamp.
 
-The application has a graphql API which will be available at https://localhost:7141/graphql. When returning a list of 
-items, the API uses the Connection Model as described here https://graphql.org/learn/pagination/, but including the 
-helper method `items` that directly lists the nodes.
-
-We recommend using the [Altair GraphQL](https://altairgraphql.dev/) client to consume the API. The GraphQL is documented 
+The application has a graphql API which will be available at https://localhost:7141/graphql.
+We recommend using the [Altair GraphQL](https://altairgraphql.dev/) client to consume the API. The GraphQL API is documented
 and the documentation can be viewed in the client.
 
+When returning a list of 
+items, the API uses the Connection Model as described here https://graphql.org/learn/pagination/, but including the 
+helper method `items` that directly lists the nodes.
 
 An example query:
 ```graphql
@@ -62,7 +62,7 @@ returned.
 An example mutation:
 ```graphql
 mutation CreateSite {
-  createSite(input: { name: "Test "}) {
+  createSite(input: { name: "Test"}) {
     site {
       id
       name
@@ -78,7 +78,8 @@ This mutation will create a new site in the application.
 The code uses the CQRS model, with the handlers in `src/Demo.Core/CQRS`. Mediator is used to send requests to the 
 handlers. The handlers use strongly typed id's provided by https://github.com/SteveDunn/Vogen.
 
-Entity Framework Core is used for persisting data with the database being Sqlite.
+Entity Framework Core is used for persisting data with the database being Sqlite. Configuration for the tables is 
+in `src/Demo.Core/Configuration`. The persistence entities are in `src/Demo.Core/Persistence`.
 
 When developing, there is a useful flag that can be enabled in `Program.cs`:
 ```csharp
