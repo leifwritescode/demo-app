@@ -19,6 +19,12 @@ public class UpdateSiteCommandHandler(IDbContextFactory<DemoDbContext> contextFa
 
         site.Name = request.Name;
 
+        /**
+         * the bug here is that we were not saving the changes.
+         * there's no need to call context.Sites.Update(site) because the entity is already being tracked by the context.
+         */
+        await context.SaveChangesAsync(cancellationToken);
+
         return site;
     }
 }
