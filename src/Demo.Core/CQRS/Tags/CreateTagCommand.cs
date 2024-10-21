@@ -6,7 +6,7 @@ using NodaTime;
 
 namespace Demo.Core.CQRS.Tags;
 
-public record CreateTagCommand(SiteId SiteId, string Name, string? Unit) : IRequest<Tag>;
+public record CreateTagCommand(SiteId SiteId, string Name, string? Unit, string? Description) : IRequest<Tag>;
 
 public class CreateTagCommandHandler(IDbContextFactory<DemoDbContext> contextFactory, IClock clock)
     : IRequestHandler<CreateTagCommand, Tag>
@@ -19,6 +19,7 @@ public class CreateTagCommandHandler(IDbContextFactory<DemoDbContext> contextFac
             SiteId = request.SiteId.Value,
             Unit = request.Unit,
             CreatedAt = clock.GetCurrentInstant(),
+            Description = request.Description
         };
         await context.Tags.AddAsync(tag, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);

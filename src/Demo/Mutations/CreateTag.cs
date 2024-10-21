@@ -14,7 +14,9 @@ public sealed record CreateTagInput(
     [property: Description("The name of the new tag")]
     string Name,
     [property: Description("The unit of the new tag")]
-    string? Unit = null
+    string? Unit = null,
+    [property: Description("The description of the new tag")]
+    string? Description = null
 );
 
 public record CreateTagPayload(
@@ -38,7 +40,7 @@ public sealed partial class DemoMutation
                 if (!id.HasValue)
                     throw new ExecutionError($"Invalid siteId");
                 
-                var tag = await SendCommand(ctx, new CreateTagCommand(id.Value, input.Name, input.Unit));
+                var tag = await SendCommand(ctx, new CreateTagCommand(id.Value, input.Name, input.Unit, input.Description));
                 return new CreateTagPayload(tag);
             });
     }
