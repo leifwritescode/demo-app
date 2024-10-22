@@ -97,7 +97,7 @@ To update the persistence data, migrations are used in `src/Demo.Core`.
 
 ```shell
 # create migration
-dotnet ef --startup-project ../Demo migrations add Initial
+otnet ef --startup-project ../Demo --project ../Demo.Core migrations add AddTagUpdatedAt
 
 # apply migration (local use, use scripts for prod)
 dotnet ef --startup-project ../Demo database update
