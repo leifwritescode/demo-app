@@ -30,6 +30,7 @@ public class CreateTests(Fixture fixture) : IClassFixture<Fixture>
         Assert.Equal(unit, tag.Unit);
         Assert.Equal(Time, tag.CreatedAt);
         Assert.Equal(description, tag.Description);
+        Assert.Null(tag.UpdatedAt);
         
         // fetch from DB
         await using var context = new DemoDbContext(fixture.Options);
@@ -40,5 +41,6 @@ public class CreateTests(Fixture fixture) : IClassFixture<Fixture>
         Assert.Equal(unit, dbTag.Unit);
         Assert.Equal(Time, dbTag.CreatedAt);
         Assert.Equal(description, dbTag.Description);
+        Assert.Null(dbTag.UpdatedAt);
     }
 }
