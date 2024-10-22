@@ -102,3 +102,14 @@ otnet ef --startup-project ../Demo --project ../Demo.Core migrations add AddTagU
 # apply migration (local use, use scripts for prod)
 dotnet ef --startup-project ../Demo database update
 ```
+
+### Notes
+
+1. I've implemented UpdatedAt as a nullable field. I took this decision as I view that to update an entity, the entity must first exist. Necessarily, that means that a create is not an update, and so I expect that the UpdatedAt field is null at point of creation. The alternative route would be to set UpdatedAt to CreatedAt at point of creation, but to _me_ that would be misleading to the end user.
+
+### Suggestions
+
+1. I would expect to see the data model and migrations stored separately as their own library, such that program elements that depend on the model but not the core can use them without bloat.
+2. I would also expect to see abstractions in their own library.
+3. Newlines at the end of files please.
+4. Opinionated, but two-space tabs.
